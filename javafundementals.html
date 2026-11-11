@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0d1117">
+    <title>Java Fundementals | AP Computer Science A Help</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            color-scheme: dark;
+            font-family: "DM Sans", sans-serif;
+            background: #0d1117;
+            color: #e6edf3;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        header {
+            position: relative;
+            overflow: hidden;
+            background: #161b22;
+        }
+
+        header::before {
+            position: absolute;
+            inset: 0 0 auto;
+            height: 5px;
+            background: #2f81f7;
+            content: "";
+        }
+
+        .header-inner {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            width: min(100% - 40px, 1120px);
+            min-height: 112px;
+            margin: 0 auto;
+        }
+
+        .header-logo {
+            display: grid;
+            flex: 0 0 56px;
+            width: 56px;
+            height: 56px;
+            place-items: center;
+            border: 1px solid #30363d;
+            border-radius: 14px;
+            background: #21262d;
+        }
+
+        .header-logo img {
+            display: block;
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+        }
+
+        .header-copy {
+            min-width: 0;
+        }
+
+        .header-kicker {
+            margin: 0 0 4px;
+            color: #8b949e;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        header h1 {
+            margin: 0;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: clamp(1.35rem, 3vw, 1.8rem);
+            line-height: 1.15;
+        }
+
+        .site-layout {
+            display: grid;
+            grid-template-columns: 180px minmax(0, 1fr);
+            gap: 32px;
+            width: min(100% - 40px, 1120px);
+            margin: 0 auto;
+        }
+
+        .sidebar {
+            padding: 40px 20px 0 0;
+            border-right: 1px solid #30363d;
+        }
+
+        .sidebar h2 {
+            margin: 0 0 12px;
+            color: #8b949e;
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .sidebar ul {
+            display: grid;
+            gap: 4px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 8px 10px;
+            border-radius: 6px;
+            color: #e6edf3;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover,
+        .sidebar a:focus-visible {
+            background: #21262d;
+            color: #58a6ff;
+        }
+
+        main {
+            min-width: 0;
+            padding: 40px 0 56px;
+        }
+
+        main h1,
+        main h2 {
+            margin: 0 0 10px;
+            font-family: "Space Grotesk", sans-serif;
+        }
+
+        main h1 {
+            font-size: clamp(1.7rem, 3vw, 2.2rem);
+        }
+
+        main h2 {
+            margin-top: 32px;
+            font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+        }
+
+        main p,
+        main li {
+            max-width: 720px;
+            line-height: 1.65;
+        }
+
+        main p {
+            margin: 0 0 20px;
+        }
+
+        main ul {
+            padding-left: 24px;
+        }
+
+        main li {
+            margin-bottom: 8px;
+        }
+
+        .java-editor {
+            width: min(100%, 760px);
+            overflow: hidden;
+            border: 1px solid #30363d;
+            border-radius: 14px;
+            background: #161b22;
+        }
+
+        .java-editor iframe {
+            display: block;
+            width: 100%;
+            height: 360px;
+            border: 0;
+        }
+
+        .pdf-viewer {
+            overflow: hidden;
+            border: 1px solid #30363d;
+            border-radius: 14px;
+            background: #161b22;
+        }
+
+        .pdf-viewer iframe {
+            display: block;
+            width: 100%;
+            height: min(760px, 80vh);
+            min-height: 480px;
+            border: 0;
+        }
+
+        .pdf-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin: 0 0 16px;
+        }
+
+        .pdf-actions a {
+            color: #58a6ff;
+        }
+
+        @media (max-width: 700px) {
+            .site-layout {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 0;
+                width: min(100% - 28px, 1120px);
+            }
+
+            .sidebar {
+                padding: 20px 0 12px;
+                border-right: 0;
+                border-bottom: 1px solid #30363d;
+            }
+
+            .sidebar ul {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            main {
+                padding: 28px 0 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-inner {
+                width: min(100% - 28px, 1120px);
+                min-height: 96px;
+                gap: 13px;
+            }
+
+            .header-logo {
+                flex-basis: 48px;
+                width: 48px;
+                height: 48px;
+                border-radius: 12px;
+            }
+
+            .header-logo img {
+                width: 36px;
+                height: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <a class="header-logo" href="index.html" aria-label="AP Computer Science A Help home">
+                <img src="https://www.freeiconspng.com/uploads/my-computer-icons-free-icons-in-devine-icons-part-2--icon-search--25.png" alt="">
+            </a>
+            <div class="header-copy">
+                <p class="header-kicker">Learn Java</p>
+                <h1>AP Computer Science A Help</h1>
+            </div>
+        </div>
+    </header>
+    <div class="site-layout">
+        <aside class="sidebar">
+            <nav aria-label="Main menu">
+                <h2>Menu</h2>
+                <ul>
+                    <li><a href="index.html#welcome">Welcome</a></li>
+                    <li><a href="index.html#run-java">Run Java</a></li>
+                    <li><a href="java.html" aria-current="page">Java Resources</a></li>
+                    <li><a href="HowtoJ.html" aria-current="page">How to Java</a></li>
+                    <li><a href="HowtoJ.html#How-It-Works">How It Works</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main>
+            <h1>
+                Java Fundementals
+            </h1>
+            <p>This Section Provides more in depth understandins of java</p>
+            <section aria-labelledby="charts-heading">
+                <h2 id="charts-heading">Computer Science Charts</h2>
+                <p>Browse the charts in the PDF below, or open or download the file.</p>
+                <p class="pdf-actions">
+                    <a href="Computer%20Science%20Charts.pdf" target="_blank" rel="noopener">Open PDF in a new tab</a>
+                    <a href="Computer%20Science%20Charts.pdf" download>Download PDF</a>
+                </p>
+                <div class="pdf-viewer">
+                    <iframe
+                        src="Computer%20Science%20Charts.pdf"
+                        title="Computer Science Charts PDF"
+                        loading="lazy">
+                        Your browser cannot display this PDF.
+                        <a href="Computer%20Science%20Charts.pdf">Open the Computer Science Charts PDF</a>.
+                    </iframe>
+                </div>
+            </section>
+            <section>
+                <h2>Fundementals Explained</h2>
+                <p>Java uses the Primitives, Controll Structures, Operators and Objects.</p>
+                <ol>
+                    <li>
+                        <h3>Primitives</h3>
+                        <ii>
+                            <h4>
+                                Int
+                            </h4>
+                            An <code>int</code> is a whole number (ex: 1, 2, 3, 4, etc.)
+                            <p>Written as <code>int x = 5;</code></ii></p>
+                        </ii>
+                        <li>
+                            <h4>
+                                Double
+                            </h4>
+                            A <code>double</code> is a real number (ex: 3.14, 8.65, 9.99, 1.95, etc.)
+                            <p>Written as <code>double x = 3.14;</code></p>
+                        </li>
+                        <li>
+                            <h4>
+                                Boolean
+                            </h4>
+                            A <code>boolean</code> is a true/false values
+                            <p>Written as <code>boolean isOn = false;</code></p>
+                        </li>
+                    </li>
+                    <li>
+                        <h3>
+                            Control Structures
+                        </h3>
+                        <li>
+                            <h4>
+                                Decision-Making
+                            </h4>
+                            <li>
+                                <h5>
+                                    If
+                                </h5>
+                                <code>if</code> detects if booleans are true or false, if a response contains 
+                            </li>
+                            <li>
+                                <h5>
+                                    If-else
+                                </h5>
+                            </li>
+                        </li>
+                    </li>
+                </ol>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
